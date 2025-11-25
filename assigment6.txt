@@ -21,3 +21,59 @@ A Is simply a way to organize code. It groups related classes together so the pr
 5. What is an event in Java?
 
 Is something that happens while the program is running, like clicking a button.
+
+6. Create a simple Employee Information Form using Java AWT. The form should allow users to enter their Name, Employee ID, and Department, and display the entered details when the "Submit" button is clicked. Upload your code to GitHub and submit your link as your answer.
+
+import java.awt.*;
+import java.awt.event.*;
+
+public class EmployeeForm extends Frame implements ActionListener {
+
+    TextField nameField;
+    TextField idField;
+    TextField deptField;
+    Label output;
+
+    public EmployeeForm() {
+        setTitle("Employee Form");
+        setSize(350, 250);
+        setLayout(new FlowLayout());
+        setVisible(true);
+
+        add(new Label("Name:"));
+        nameField = new TextField(20);
+        add(nameField);
+
+        add(new Label("Employee ID:"));
+        idField = new TextField(20);
+        add(idField);
+
+        add(new Label("Department:"));
+        deptField = new TextField(20);
+        add(deptField);
+
+        Button submit = new Button("Submit");
+        submit.addActionListener(this);
+        add(submit);
+
+        output = new Label("");
+        add(output);
+
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                dispose();
+            }
+        });
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        String n = nameField.getText();
+        String i = idField.getText();
+        String d = deptField.getText();
+        output.setText(n + "  " + i + "  " + d);
+    }
+
+    public static void main(String[] args) {
+        new EmployeeForm();
+    }
+}
