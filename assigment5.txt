@@ -1,0 +1,150 @@
+Assigment 5 Gabriel Codero
+
+1- Upload your notes for Java: Testing with JUnit by Maaike van Putten, sections 1,2, and 3.  Bullet points are fine
+
+JUnit is the main testing framework for Java
+
+Unit test checks small pieces of code to see if the work correctly
+
+A test class usually matches the name of the class being tested
+
+A test method has @Test
+
+JUnit tests help catch mistakes early before the program becomes too big
+
+Tests should be small and focus on one thing
+
+Assertions include: assertEquals, assertTrue, assertFalse, assertNotNull
+
+A displayName can make tests easier to undertand
+
+Nested tests help group related  tests
+
+Good tests are clear, repeatable and consistent
+
+Each test should only test one behavior at a time
+
+Dependency injection lets JUnit give you objects for testing
+
+Repeated tests run the same test many times
+
+Custom messages make failures easier to understand
+
+
+2- Upload your notes for Practical Test-Driven Development for Java Programmers by Matt Greencroft, sections 1-6.  Bullet points are fine.
+I did not find the course by Matt Greencroft so I took general notes about the topic.
+
+TDD Helps organize big codebases
+
+Tests help teams understand each others code
+
+sometimes you test code that depends on tother parts
+
+A single test should test one result
+
+Test become documentation
+
+Red: create a failing test
+
+Green: write just enough code so the test passes
+
+Refactor: clean up the code while keeping tests passing
+
+TDD helps avoid writing unnecessary code
+
+Forces you to think about how the code should behave
+
+3- Create TWO of your own examples of code with unit tests.  Write a page explaining each scenario and how the unit tests work.
+
+
+
+Example 1 calculator
+
+
+public class Calculator {
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    public int divide(int a, int b) {
+        return a / b;
+    }
+}
+
+
+//calculator test
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+public class CalculatorTest {
+
+    @Test
+    void testAdd() {
+        Calculator c = new Calculator();
+        assertEquals(7, c.add(3, 4));
+    }
+
+    @Test
+    void testDivide() {
+        Calculator c = new Calculator();
+        assertEquals(5, c.divide(10, 2));
+    }
+}
+
+
+
+
+Example 2 password validation
+public class PasswordValidator {
+    public boolean isValid(String pass) {
+        if (pass.length() < 6) return false;
+        return pass.contains("!");
+    }
+}
+
+//password validation tests
+
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+public class PasswordValidatorTest {
+
+    @Test
+    void testShortPassword() {
+        PasswordValidator pv = new PasswordValidator();
+        assertFalse(pv.isValid("abc"));
+    }
+
+    @Test
+    void testMissingSymbol() {
+        PasswordValidator pv = new PasswordValidator();
+        assertFalse(pv.isValid("abcdef"));
+    }
+
+    @Test
+    void testValidPassword() {
+        PasswordValidator pv = new PasswordValidator();
+        assertTrue(pv.isValid("hello!"));
+    }
+}
+
+
+
+----->>>Calculator explained.
+In this example i created the calculator class and it has 2 methods: add and divide. These 2 methods are simple but they let me demonstrate how unit testing works. The purpuse of unit testing is tho check if the behavior of each method is the expected behavior. I created a separate test clas called CalculatorTest where all these tests live.
+
+The first test, testAdd(), checks if the add method returns the right sum. I used assetEquals to compare the expected value which is 7 with the actual value returned by the add method. If the values match, the test passes, and if not the test fails. This helps me verify that the logic of the method is correct.
+
+The second test, testDivide(), checks the divide method using another assertEquals. I expect 10 divided by 2 to equal 5. If the method returns the right value, the test passes. If it does not, the tests fails. These tests help me catch mistakes early, and they also give me confidence if I ever change the code later. The unit tests act like protection so I don't accidentally break the behavior of the Calculator class as I keep working on it.
+
+
+
+----->>>Validate password explained.
+
+For this example I created a PasswordValidator class that checks if a password is valid based on two simple rules. The password must be at least six characters long, and it must contain an exclamation mark. This is a basic example, but it shows how unit tests check different scenarios.
+
+In the test class, the first test checks a short password and since “abc” is fewer than six characters, the test expects isValid to return false. assertFalse is used here because I expect the validation to fail. This verifies that the validator correctly handles passwords that are too short.
+
+The second test checks a password that has the right length but doesn’t contain an exclamation mark. The rule says the symbol is required, so I expect the result to be false. This test shows that the validator enforces all the rules, not just length.
+
+The last test checks a valid password that meets both rules. I used assertTrue because this one should pass validation. If all tests pass, it means the validator is working correctly across different scenarios. This example demonstrates how unit tests cover different cases, invalid inputs, and valid inputs. Together they give me confidence that the class behaves as expectd.
