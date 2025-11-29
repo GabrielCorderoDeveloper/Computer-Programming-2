@@ -1,0 +1,50 @@
+Assigment 2 Gabriel Cordero
+
+1- Watch and take notes (bullet points are fine) for section 1.  The key here is to understand the ideas we will be discusses throughout this course at an abstract level.
+
+Is easier to think of programming as a list of steps to follow
+
+With object oriented we have more reusability. 
+
+We can have different objects that are similar but with different properties.
+
+Classes are similar to blueprints, the determine what an object would do and look like.
+
+With abstraction you can hide unnecessary details and focus on what matters.
+
+You can protect data using encapsulation.
+
+With polymorphism objects behave different.
+
+
+2- What is the benefit of using an array?
+It let's you store multiple values under one name. Everything is organized in order, so it is easy to access the values.
+
+3- What is the benefit of creating objects and classes?
+With objects and classes we can reuse code and stay organized. It also makes the program easier to understand and maintain.
+
+4- Create a class called Bank. It should have a variable for amount, a method for deposit and a method for withdrawal.  There should also be an array of doubles that keeps track of every deposit or withdrawal.  Create a method called listInteractions that prints the array of deposits and withdrawals. The deposits should be positive and the withdrawals should be negative.
+
+public class Bank {
+    double amount;
+    double[] history = new double[100];
+    int count = 0;
+
+    public void deposit(double value) {
+        amount += value;
+        history[count] = value;
+        count++;
+    }
+
+    public void withdrawal(double value) {
+        amount -= value;
+        history[count] = -value;  // negative because it's a withdrawal
+        count++;
+    }
+
+    public void listInteractions() {
+        for (int i = 0; i < count; i++) {
+            System.out.println(history[i]);
+        }
+    }
+}
