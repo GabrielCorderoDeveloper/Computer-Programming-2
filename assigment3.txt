@@ -1,0 +1,111 @@
+Assigment 3
+
+1- Please go to lynda.com and sign in with your farmingdale email. (It is free if you sign in with your Farmingdale email).  Go to Java Essential Training for Students by Peggy Fisher.  Watch and take notes (bullet points are fine) for sections 6 and 7.(Please note that we will cover most of seciton 7 at a later point, but it is useful to watch it in order to get a broader picture of the material.)
+I looked for the course everywhere but it appears to be taken down by the author.
+
+2- What is encapsulation?
+It is hiddng the internal details of a class or other parts of the program. It keeps everything ore organized and it protects the hidden parts.
+
+3- What is a null reference and what is the problem with it?
+It means the variable exists  but it does not point to any object.
+
+4- What is the difference between inheritance and composition?
+Composition is when a class is built using other object inside it. Inheritance is when one class gets features from a different class, like a child class.
+
+5- Create an Automobile class with attributes model year, brand and method honk
+Create 3 classes that extend the Automobile class  (Car, SportsCar, JunkCar)
+Create the compareTo, toString, and equals methods for them
+Create  methods  (accelerate, stop, reverse, honk, …)
+Create a Tester class where you will put all your Automobiles into an array and test their methods.
+
+
+class Automobile {
+    int modelYear;
+    String brand;
+
+    public Automobile(int modelYear, String brand) {
+        this.modelYear = modelYear;
+        this.brand = brand;
+    }
+
+    public void honk() {
+        System.out.println(brand + ": honk!");
+    }
+
+    public void accelerate() {
+        System.out.println(brand + " is accelerating");
+    }
+
+    public void stop() {
+        System.out.println(brand + " stopped");
+    }
+
+    public void reverse() {
+        System.out.println(brand + " is reversing");
+    }
+
+    public int compareTo(Automobile other) {
+        return this.modelYear - other.modelYear;
+    }
+
+    public boolean equals(Object obj) {
+        if (obj instanceof Automobile) {
+            Automobile other = (Automobile) obj;
+            return this.modelYear == other.modelYear &&
+                   this.brand.equals(other.brand);
+        }
+        return false;
+    }
+
+    public String toString() {
+        return modelYear + " " + brand;
+    }
+}
+
+class Car extends Automobile {
+    public Car(int modelYear, String brand) {
+        super(modelYear, brand);
+    }
+}
+
+class SportsCar extends Automobile {
+    public SportsCar(int modelYear, String brand) {
+        super(modelYear, brand);
+    }
+
+    public void accelerate() {
+        System.out.println(brand + " is accelerating fast!");
+    }
+}
+
+class JunkCar extends Automobile {
+    public JunkCar(int modelYear, String brand) {
+        super(modelYear, brand);
+    }
+
+    public void honk() {
+        System.out.println(brand + ": *broken honk noise*");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Automobile[] autos = new Automobile[3];
+
+        autos[0] = new Car(2015, "Toyota");
+        autos[1] = new SportsCar(2022, "Ferrari");
+        autos[2] = new JunkCar(1998, "OldMobile");
+
+        for (Automobile a : autos) {
+            System.out.println(a.toString());
+            a.honk();
+            a.accelerate();
+            a.stop();
+            a.reverse();
+            System.out.println();
+        }
+
+        System.out.println(autos[0].equals(new Car(2015, "Toyota")));
+        System.out.println(autos[0].compareTo(autos[2]));
+    }
+}
