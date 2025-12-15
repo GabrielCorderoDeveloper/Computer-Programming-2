@@ -118,7 +118,7 @@ public class EcommerceApp {
 
         // Lambdas for tax and shipping
         Function<Double, Double> tax = sub -> sub * 0.08;
-        Function<Double, Double> shipping = sub -> (sub >= 1000) ? 0 : 25;
+        Function<Double, Double> shipping = sub -> (sub >= 1000) ? 0.0 : 25.0;
 
         System.out.println("Customer: " + customer.getUsername());
         System.out.println("Admin: " + admin.getUsername());
